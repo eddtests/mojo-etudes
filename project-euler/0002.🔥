@@ -1,0 +1,31 @@
+# https://projecteuler.net/problem=2
+
+struct Fib:
+    var a: Int
+    var b: Int
+
+    fn __init__(inout self):
+        self.a = 0
+        self.b = 1
+
+    fn generate_next(inout self) -> Int:
+        let new_value = self.a + self.b
+        if self.a > self.b:
+            self.b = new_value
+        else:
+            self.a = new_value
+
+        return new_value
+    
+    fn get(self) -> Int:
+        return self.a + self.b
+    
+
+fn main() raises:
+    var fib_seq = Fib()
+    var total = 0
+    while fib_seq.generate_next() < 4000000:
+        if fib_seq.get() % 2 == 0:
+            total += fib_seq.get()
+
+    print(total)
